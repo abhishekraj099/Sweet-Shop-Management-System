@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    // Backend folder layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Node + CommonJS
+    "target": "ES2019",
+    "module": "commonjs",
+
+    // Allow default imports from commonjs modules
+    "esModuleInterop": true,
+
+    // Type checking
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "tests"]
+}
