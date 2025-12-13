@@ -1,12 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "echo \"skip tsc on vercel\"",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "start:vercel": "ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,9 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.0.1"
+    "mongoose": "^9.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -31,8 +34,6 @@
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
     "supertest": "^7.1.4",
-    "ts-jest": "^29.4.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "ts-jest": "^29.4.6"
   }
 }
