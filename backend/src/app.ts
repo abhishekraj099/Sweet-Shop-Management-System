@@ -8,15 +8,27 @@ import { connectDB } from "./config/db";
 dotenv.config();
 
 const app = express();
-const FRONTEND_ORIGIN =
-  process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+
+// Allow both local and deployed frontend
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://sweetfrontend.vercel.app"
+];
 
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 // Middleware to ensure DB connection before each request
