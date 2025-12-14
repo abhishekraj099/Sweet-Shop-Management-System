@@ -97,7 +97,7 @@ router.post("/forgot-password", async (req, res) => {
     // In production, send email here
     // For now, log the token (for testing)
     console.log("Reset token:", resetToken);
-    console.log("Reset URL:", `http://localhost:5173/reset-password?token=${resetToken}`);
+    console.log("Reset URL:", `https://sweetfrontend.vercel.app/reset-password?token=${resetToken}`);
 
     return res.json({
       message: "If that email exists, a reset link has been sent.",
