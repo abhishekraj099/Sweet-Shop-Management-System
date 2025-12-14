@@ -9,6 +9,14 @@ if (!MONGODB_URI) {
   throw new Error("MONGODB_URI is not set in .env");
 }
 
+// Type declaration for global - MUST BE AT TOP
+declare global {
+  var mongoose: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  };
+}
+
 // Cache the connection to reuse across serverless function invocations
 let cached = global.mongoose;
 
@@ -30,9 +38,9 @@ export const connectDB = async () => {
     };
 
     console.log("Creating new MongoDB connection...");
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
       console.log("Connected to MongoDB");
-      return mongoose;
+      return mongooseInstance;
     });
   }
 
@@ -46,11 +54,3 @@ export const connectDB = async () => {
 
   return cached.conn;
 };
-
-// Type declaration for global
-declare global {
-  var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  };
-}
