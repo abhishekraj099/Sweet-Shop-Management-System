@@ -9,7 +9,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState<"user" | "admin">("user");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -36,10 +35,10 @@ function Register() {
         name,
         email,
         password,
-        role,
+        role: "user",
       });
       
-      alert(`Registration successful as ${role}! Please login.`);
+      alert("Registration successful! Please login.");
       navigate("/login");
     } catch (err: any) {
       console.error(err);
@@ -111,51 +110,6 @@ function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Re-enter your password"
           />
-        </div>
-
-        <div className="field">
-          <label className="field-label">Account Type</label>
-          <div style={{ display: "flex", gap: "16px", marginTop: "8px" }}>
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                cursor: "pointer",
-                color: role === "user" ? "#f97316" : "rgba(148, 163, 184, 0.8)",
-              }}
-            >
-              <input
-                type="radio"
-                name="role"
-                value="user"
-                checked={role === "user"}
-                onChange={(e) => setRole(e.target.value as "user" | "admin")}
-                style={{ cursor: "pointer" }}
-              />
-              <span>Regular User</span>
-            </label>
-
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                cursor: "pointer",
-                color: role === "admin" ? "#f97316" : "rgba(148, 163, 184, 0.8)",
-              }}
-            >
-              <input
-                type="radio"
-                name="role"
-                value="admin"
-                checked={role === "admin"}
-                onChange={(e) => setRole(e.target.value as "user" | "admin")}
-                style={{ cursor: "pointer" }}
-              />
-              <span>Admin</span>
-            </label>
-          </div>
         </div>
 
         <button className="btn btn-primary" onClick={handleRegister}>
