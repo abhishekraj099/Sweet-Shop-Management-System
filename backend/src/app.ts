@@ -19,8 +19,16 @@ app.use(
 );
 app.use(express.json());
 
-// Connect to database (important for serverless)
-connectDB();
+// Middleware to ensure DB connection before each request
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    next(error);
+  }
+});
 
 // Routes
 app.use("/api/auth", authRoutes);
