@@ -1,9 +1,9 @@
-// src/app.ts
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
 import sweetRoutes from "./routes/sweets";
+import { connectDB } from "./config/db";
 
 dotenv.config();
 
@@ -18,6 +18,9 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Connect to database (will be cached across invocations)
+connectDB();
 
 // Important: keep the /api prefix here
 app.use("/api/auth", authRoutes);
