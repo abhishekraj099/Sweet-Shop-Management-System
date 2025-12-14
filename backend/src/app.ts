@@ -19,10 +19,10 @@ app.use(
 );
 app.use(express.json());
 
-// Connect to database (will be cached across invocations)
+// Connect to database (important for serverless)
 connectDB();
 
-// Important: keep the /api prefix here
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/sweets", sweetRoutes);
 
