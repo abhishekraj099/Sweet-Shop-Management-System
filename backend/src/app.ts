@@ -19,6 +19,7 @@ app.use(
 );
 app.use(express.json());
 
+// Important: keep the /api prefix here
 app.use("/api/auth", authRoutes);
 app.use("/api/sweets", sweetRoutes);
 
