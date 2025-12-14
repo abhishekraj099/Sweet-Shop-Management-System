@@ -49,7 +49,6 @@ function ResetPassword() {
 
       setMessage(res.data.message);
       
-      // Redirect to login after 2 seconds
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -147,3 +146,6 @@ function ResetPassword() {
       </div>
     </div>
   );
+}
+
+export default ResetPassword;
