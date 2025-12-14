@@ -47,8 +47,12 @@ function Dashboard({ token, user, onLogout }: DashboardProps) {
   });
 
   const loadSweets = async () => {
-    const res = await api.get<Sweet[]>("/sweets");
-    setSweets(res.data);
+    try {
+      const res = await api.get<Sweet[]>("/sweets");
+      setSweets(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handlePurchase = async (id: string) => {
@@ -68,8 +72,12 @@ function Dashboard({ token, user, onLogout }: DashboardProps) {
     if (minPrice.trim()) params.minPrice = Number(minPrice);
     if (maxPrice.trim()) params.maxPrice = Number(maxPrice);
 
-    const res = await api.get<Sweet[]>("/sweets/search", { params });
-    setSweets(res.data);
+    try {
+      const res = await api.get<Sweet[]>("/sweets/search", { params });
+      setSweets(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const openCreateForm = () => {
@@ -201,92 +209,91 @@ function Dashboard({ token, user, onLogout }: DashboardProps) {
           </button>
         </div>
 
-        {user.role === "admin" && (
-          <div style={{ marginBottom: 16 }}>
-            {!showForm && (
-              <button className="btn btn-ghost" onClick={openCreateForm}>
-                + Add sweet
-              </button>
-            )}
+        {/* ALL USERS can add sweets */}
+        <div style={{ marginBottom: 16 }}>
+          {!showForm && (
+            <button className="btn btn-ghost" onClick={openCreateForm}>
+              + Add sweet
+            </button>
+          )}
 
-            {showForm && (
-              <div
-                style={{
-                  marginTop: 8,
-                  marginBottom: 8,
-                  padding: 12,
-                  borderRadius: 16,
-                  border: "1px solid rgba(31,41,55,0.9)",
-                  background: "radial-gradient(circle at top, #020617, #020617)",
-                }}
-              >
-                <div className="field">
-                  <label className="field-label">Name</label>
-                  <input
-                    className="input"
-                    value={sweetForm.name}
-                    onChange={(e) =>
-                      setSweetForm({ ...sweetForm, name: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="field">
-                  <label className="field-label">Category</label>
-                  <input
-                    className="input"
-                    value={sweetForm.category}
-                    onChange={(e) =>
-                      setSweetForm({ ...sweetForm, category: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="field">
-                  <label className="field-label">Price (₹)</label>
-                  <input
-                    className="input"
-                    type="number"
-                    value={sweetForm.price}
-                    onChange={(e) =>
-                      setSweetForm({
-                        ...sweetForm,
-                        price: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-                <div className="field">
-                  <label className="field-label">Quantity</label>
-                  <input
-                    className="input"
-                    type="number"
-                    value={sweetForm.quantity}
-                    onChange={(e) =>
-                      setSweetForm({
-                        ...sweetForm,
-                        quantity: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-
-                <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
-                  <button className="btn btn-primary" onClick={handleSaveSweet}>
-                    {editingSweet ? "Update sweet" : "Create sweet"}
-                  </button>
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => {
-                      setShowForm(false);
-                      setEditingSweet(null);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </div>
+          {showForm && (
+            <div
+              style={{
+                marginTop: 8,
+                marginBottom: 8,
+                padding: 12,
+                borderRadius: 16,
+                border: "1px solid rgba(31,41,55,0.9)",
+                background: "radial-gradient(circle at top, #020617, #020617)",
+              }}
+            >
+              <div className="field">
+                <label className="field-label">Name</label>
+                <input
+                  className="input"
+                  value={sweetForm.name}
+                  onChange={(e) =>
+                    setSweetForm({ ...sweetForm, name: e.target.value })
+                  }
+                />
               </div>
-            )}
-          </div>
-        )}
+              <div className="field">
+                <label className="field-label">Category</label>
+                <input
+                  className="input"
+                  value={sweetForm.category}
+                  onChange={(e) =>
+                    setSweetForm({ ...sweetForm, category: e.target.value })
+                  }
+                />
+              </div>
+              <div className="field">
+                <label className="field-label">Price (₹)</label>
+                <input
+                  className="input"
+                  type="number"
+                  value={sweetForm.price}
+                  onChange={(e) =>
+                    setSweetForm({
+                      ...sweetForm,
+                      price: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
+              <div className="field">
+                <label className="field-label">Quantity</label>
+                <input
+                  className="input"
+                  type="number"
+                  value={sweetForm.quantity}
+                  onChange={(e) =>
+                    setSweetForm({
+                      ...sweetForm,
+                      quantity: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
+
+              <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+                <button className="btn btn-primary" onClick={handleSaveSweet}>
+                  {editingSweet ? "Update sweet" : "Create sweet"}
+                </button>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => {
+                    setShowForm(false);
+                    setEditingSweet(null);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="table-wrapper">
           <table className="table">
@@ -325,22 +332,20 @@ function Dashboard({ token, user, onLogout }: DashboardProps) {
                         >
                           {disabled ? "Out of stock" : "Purchase"}
                         </button>
-                        {user.role === "admin" && (
-                          <>
-                            <button
-                              className="btn btn-ghost"
-                              onClick={() => openEditForm(sweet)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="btn btn-ghost"
-                              onClick={() => handleDeleteSweet(sweet._id)}
-                            >
-                              Delete
-                            </button>
-                          </>
-                        )}
+                        
+                        {/* ALL USERS can edit and delete */}
+                        <button
+                          className="btn btn-ghost"
+                          onClick={() => openEditForm(sweet)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-ghost"
+                          onClick={() => handleDeleteSweet(sweet._id)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>

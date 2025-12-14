@@ -65,7 +65,7 @@ function Login({ onLogin }: LoginProps) {
             className="input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="abhisraj099@gmail.com"
+            placeholder="your.email@example.com"
           />
         </div>
 
@@ -84,6 +84,26 @@ function Login({ onLogin }: LoginProps) {
           Login
         </button>
 
+        {/* Forgot Password Link */}
+        <div
+          style={{
+            marginTop: "12px",
+            textAlign: "center",
+          }}
+        >
+          <Link
+            to="/forgot-password"
+            style={{
+              color: "#f97316",
+              textDecoration: "none",
+              fontSize: "14px",
+            }}
+          >
+            Forgot password?
+          </Link>
+        </div>
+
+        {/* Register Link */}
         <div
           style={{
             marginTop: "16px",
