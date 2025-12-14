@@ -2,8 +2,6 @@
 
 A full‑stack web application to manage sweets inventory, pricing, and purchases. Users can log in, view sweets, search and filter by different criteria, and perform inventory operations through a modern dashboard UI.
 
----
-
 ## Features
 
 - User registration and login with JWT authentication
@@ -20,8 +18,6 @@ A full‑stack web application to manage sweets inventory, pricing, and purchase
 - Low‑stock indicator (quantity less than 5)
 - Persistent login using local storage
 - Responsive dark‑themed UI
-
----
 
 ## Tech Stack
 
@@ -48,8 +44,6 @@ A full‑stack web application to manage sweets inventory, pricing, and purchase
 
 - Jest
 - Supertest
-
----
 
 ## Project Structure
 
@@ -87,8 +81,6 @@ root/
 └── tsconfig.json
 
 
----
-
 ## Getting Started
 
 ### Prerequisites
@@ -96,8 +88,6 @@ root/
 - Node.js (recommended 18+)
 - npm
 - MongoDB instance (local or cloud, e.g. MongoDB Atlas)
-
----
 
 ## Backend Setup
 
@@ -124,8 +114,6 @@ npm run dev
 
 The API will be available at `http://localhost:5000`.
 
----
-
 ## Frontend Setup
 
 1. Go to frontend folder:
@@ -151,8 +139,6 @@ npm run dev
 
 The app will be available at `http://localhost:5173`.
 
----
-
 ## Running the App Locally
 
 1. Start MongoDB (or make sure your Atlas cluster is running).
@@ -171,8 +157,6 @@ npm run dev
 
 
 4. Open the browser at `http://localhost:5173`.
-
----
 
 ## API Overview
 
@@ -212,8 +196,6 @@ Authorization: Bearer <token>
 - `POST /api/sweets/:id/purchase`  
   Purchase a sweet and decrease quantity.
 
----
-
 ## Tests
 
 The backend is covered by Jest + Supertest integration tests.
@@ -233,8 +215,6 @@ The main suite (`tests/auth.sweets.test.ts`) covers:
 - Creating a sweet
 - Listing sweets and verifying created data
 
----
-
 # Sweet Shop Management System
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://sweetfrontend.vercel.app)
@@ -242,6 +222,12 @@ The main suite (`tests/auth.sweets.test.ts`) covers:
 
 **Live Demo:** https://sweetfrontend.vercel.app  
 **Backend API:** https://sweetbackend.vercel.app
+
+
+<img width="497" height="827" alt="image" src="https://github.com/user-attachments/assets/d1631a0c-15cc-4608-85de-cd5df45e9f01" />
+<img width="417" height="670" alt="image" src="https://github.com/user-attachments/assets/31b7ae51-9413-490a-9312-c667d1e998c2" />
+<img width="1026" height="527" alt="image" src="https://github.com/user-attachments/assets/2ef2e85d-be12-42f9-a609-bfa43878bdae" />
+<img width="1037" height="885" alt="image" src="https://github.com/user-attachments/assets/2ce47345-08f0-499d-ac83-6260d5291751" />
 
 
 
